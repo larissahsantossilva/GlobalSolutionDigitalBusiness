@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+body{
+	background-color: rgb(136, 198, 221);
+}
+
+.card-form{
+	width: 25em;
+	margin: 20px auto;
+}
+
+p:commandLink .teste{
+	color: white;
+	font-size: 20px
+}

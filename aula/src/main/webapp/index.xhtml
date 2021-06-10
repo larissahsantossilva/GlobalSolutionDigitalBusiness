@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+    
+
+<ui:composition template="_template.xhtml">
+		<ui:define name="title">Home</ui:define>
+
+		<ui:define name="content">
+		
+		<div class="card product">
+		    <h:form id="form">
+		        <p:dataView var="hotel" value="#{hotelBean.hoteis}" rows="10" paginator="true"
+		                    rowsPerPageTemplate="1,2,3,4"
+		                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+		
+		            <p:dataViewGridItem>
+		                <div class="product-grid-item card border-1">
+		                    <div class="product-grid-item-top">
+		                        <div>
+		                            <i class="pi pi-tag product-category-icon"/>
+		                            <span class="product-category">#{produto.categoria}</span>
+		                        </div>
+		                        <span class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{produto.inventarioStatus.text}</span>
+		                    </div>
+		                    <div class="product-grid-item-content">
+		                         <p:graphicImage value="#{produto.imagem}"/>
+		                        <div class="product-name">#{produto.nome}</div>
+		                        <div class="product-description">#{produto.descricao}</div>
+		                        <p:rating readonly="true" value="#{product.rating}"/>
+		                    </div>
+		                    <div class="product-grid-item-bottom">
+		                        <h:outputText value="#{produto.valor}" styleClass="product-price">
+		                            <f:convertNumber currencySymbol="$" type="currency"/>
+		                        </h:outputText>
+		                        <p:commandButton type="button"
+		                                            value="Add To Cart"
+		                                            icon="pi pi-shopping-cart"
+		                                            disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
+		                        </p:commandButton>
+		                    </div>
+		                </div>
+		            </p:dataViewGridItem>
+		
+		            <p:dataViewListItem>
+		                <div class="setup-list-item">
+		           
+		                    <div class="setup-list-detail">
+		                        <div class="setup-name" style="font-size:20">#{hotel.nome}</div>
+		                        <div class="setup-description">#{hotel.descricao}</div>
+		                         <p:graphicImage value="#{hotel.imagem}"/>
+		                        <p:rating value="0"/>
+		                        
+		                    </div>
+		                    <div class="setup-list-action">
+		                        <h:outputText value="#{hotel.valor}" styleClass="setup-price">
+		                            <f:convertNumber currencySymbol="R$" type="currency"/>
+		                        </h:outputText>
+		                       
+		                    </div>
+		                </div>
+		            </p:dataViewListItem>
+		        </p:dataView>
+		    </h:form>
+		</div>
+				
+	
+	</ui:define>
+		
+</ui:composition>    
+    
+		
+</html>

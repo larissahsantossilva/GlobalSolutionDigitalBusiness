@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+    
+    
+<ui:composition template="_template.xhtml">
+	<ui:define name="title">Login</ui:define>
+	
+	<ui:define name="header">
+		<h2 style="color: #191970;
+		font-family: Arial; text-align: center;">Acesse GulliverTraveller</h2>
+	</ui:define>
+	
+	<ui:define name="content" >
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
+		
+		<h:form>
+		<p:card class="card-form">
+		
+		    <f:facet name="title">
+		        Login
+		    </f:facet>
+		   
+		   <div class="ui-fluid">
+				<div class="p-field p-grid">
+				    <label for="email" class="p-col-fixed" style="width:100px">E-mail</label>
+				    <div class="p-col">
+				        <p:inputText 
+				        		id="email" 
+				        		type="text" 
+				        		value="#{usuarioBean.usuario.email}" 
+				        		required="true"
+				        		validatorMessage="E-mail inválido"
+				        	>
+				        	<f:ajax event="blur" render="messages"/>
+				        	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+				        </p:inputText>
+				    </div>
+				</div>
+				
+				<div class="p-field p-grid">
+				    <label for="senha" class="p-col-fixed" style="width:100px">Senha</label>
+				    <div class="p-col">
+				        <p:password id="senha" type="text" value="#{usuarioBean.usuario.senha}" required="true" 
+				        toggleMask="true">
+				        	<f:ajax event="blur" render="messages"/>
+				        	<f:validateLength minimum="8"/>
+				        </p:password>
+				    </div>
+				</div>
+				
+				<!-- teste com: camila@gmail.com / senha: acb15423  DEU CERTO-->
+				
+			</div>
+		    
+		    <f:facet name="footer">
+		        <p:commandButton icon="pi pi-check" value="Entrar" action="#{usuarioBean.login}">
+		        	<f:ajax execute="@form" render="messages" />
+		        </p:commandButton>
+		    </f:facet>
+		</p:card>
+		</h:form>
+		
+		
+	</ui:define>
+
+</ui:composition>
+</html>
